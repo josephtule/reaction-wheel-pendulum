@@ -123,11 +123,14 @@ then taking the derivative
 $$\dot{\vec{x}} = \left\lbrack \begin{array}{c}
 \dot{\theta} \\
 \ddot{\theta} 
+\end{array}\right\rbrack = \left\lbrack \begin{array}{c}
+\dot{x_{1}} \\
+\dot{x_{2}}
 \end{array}\right\rbrack$$ 
 
 $$ = \left\lbrack \begin{array}{c}
 \dot{x_{2}} \\
-I_{p}^{-1} (m_m g \ell sin(x_{1}) - I_{w} u - \mu x_{2}) \hat{k}
+I_{p}^{-1} (m_m g \ell sin(x_{1}) - \mu x_{2} - I_{w} u) \hat{k}
 \end{array}\right\rbrack$$
 
 Which is the state-space form of your equations of motion.
@@ -142,9 +145,23 @@ $$ I_{w} = \left\lbrack \begin{array}{ccc}
 0 & 0 & \frac{1}{3}m_w \left(r_2^2 +r_1^2 \right)
 \end{array}\right\rbrack$$
 
-The next inertia tensor is for the pendulum assembly about the origin point, O. As mentioned before, this will be modeled as a rod with a point mass attatched to the opposite end. The inertia tensor for a rod is
+The next inertia tensor is for the pendulum assembly about the origin point, O. As mentioned before, this will be modeled as a rod with a point mass attatched to the opposite end. The inertia tensor for a rod with a point mass at the is
 
+$$I_p = \left\lbrack \begin{array}{ccc}
+m_{\mathrm{rod}} L^2  & 0 & 0\\
+0 & \frac{1}{3}m_{\mathrm{rod}} L^2 & 0\\
+0 & 0 & \frac{1}{3}m_{\mathrm{rod}} L^2
+\end{array}\right\rbrack +\left\lbrack \begin{array}{ccc}
+0 & 0 & 0\\
+0 & 0 & 0\\
+0 & 0 & m_w L^2 
+\end{array}\right\rbrack$$
 
+$$ = \left\lbrack \begin{array}{ccc}
+m_{\mathrm{rod}} L^2  & 0 & 0\\
+0 & \frac{1}{3}m_{\mathrm{rod}} L^2 & 0\\
+0 & 0 & \frac{1}{3}m_{\mathrm{rod}} L^2 + m_{w} L^2
+\end{array}\right\rbrack$$
 
 ## Control Laws
 
