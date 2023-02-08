@@ -93,6 +93,7 @@ $$ = \ell m_p g sin(\phi) \hat{b_3} = \ell m_p g sin(\phi) \hat{k}$$
 Where $m_p$ is the mass of the pendulum arm, the motor, and the reaction wheel. Substituting this back into our pendulum torque gives us 
 
 $$I_w\ddot{\theta} (-\hat{k}) + \vec{\tau_{g}} = -I_w\ddot{\theta} \hat{k} + \ell m_p g sin(\phi) \hat{k}$$
+
 $$ = I_{p}\ddot{\phi}$$
 
 This gives us the equations of motion for the system. Here we can determine if we want to include $\ddot{\theta}$ as a state variable or as an input. To decrease the system order, we will use it as an input which will give is a state vector in $\mathbb{R}^2$.
@@ -101,11 +102,31 @@ This gives us the equations of motion for the system. Here we can determine if w
 
 We will use various state-space methods to generate a control scheme for the reaction wheel, so conversion into state-space is a logical next step. To do so, we will take the state vector as
 
-$$\vec{x} = $$
+$$\vec{x} = \left\lbrack \begin{array}{c}
+x_{1} \\
+x_{2}
+\end{array}\right\rbrack$$
+
+$$ = \left\lbrack \begin{array}{c}
+\theta \\
+\dot{\theta} 
+\end{array}\right\rbrack $$
 
 then taking the derivative
 
-$$\dot{\vec{x}} = $$ 
+$$\dot{\vec{x}} = \left\lbrack \begin{array}{c}
+\dot{\theta} \\
+\ddot{\theta} 
+\end{array}\right\rbrack$$ 
+
+$$ = \left\lbrack \begin{array}{c}
+\dot{x_{2}} \\
+I_{p}^{-1} (m_m g \ell sin(\phi) - I_{w} \ddot{\theta}) \hat{k}
+\end{array}\right\rbrack
+
+
+### Moments of Inertia
+
 
 ## Control Laws
 
