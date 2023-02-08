@@ -162,7 +162,7 @@ m_{\mathrm{rod}} L^2  & 0 & 0\\
 0 & 0 & \frac{1}{3}m_{\mathrm{rod}} L^2 + m_{w} L^2
 \end{array}\right\rbrack$$
 
-Since all rotations will be along the third axis, $\hat{k} = \hat{b}_1 = \hat{c}_1$
+Since all rotations will be along the third axis, $\hat{k} = \hat{b}_1 = \hat{c}_1$, only the bottom right element (3,3) will be used from each of the inertia tensors.
 
 ## Control
 ### Challenges
