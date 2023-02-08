@@ -179,7 +179,7 @@ $$
 \vec{f}(\vec{x},\vec{u}) \approx \vec{f}(\vec{x}_0,\vec{u}_0) + \frac{\partial{\vec{f}}}{\partial{\vec{x}}}(\vec{x}_0,\vec{u}_0) (\vec{x} - \vec{x}_0) + \frac{\partial{\vec{f}}}{\partial{\vec{u}}} (\vec{x}_0,\vec{u}_0) (\vec{u} - \vec{u}_0) 
 $$
 
-$$ A = \mathit{\mathbf{J}}=\left\lbrack \begin{array}{ccc}
+$$ A = \mathit{\left\lbrack \begin{array}{ccc}
 \frac{\partial }{\partial x_1 }\vec{f}  & \ldotp \ldotp \ldotp  & \frac{\partial }{\partial x_n }\vec{f} 
 \end{array}\right\rbrack =\left\lbrack \begin{array}{c}
 \nabla^T f_1 \\
