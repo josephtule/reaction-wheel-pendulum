@@ -166,11 +166,36 @@ Since all rotations will be along the third axis ($\hat{k} = \hat{b}_1 = \hat{c}
 
 ## Control
 ### Challenges
-
 One of the challenges of controlling this system is the saturation of the motor. Since motors have a maximum RPM, the motors can't accelerate higher than this limit to apply additional torque. Traditional control methods such as pole placement and LQR are unable to set contraints on the maximum RPM of the motors into account and will be seen when calculating the gains for those methods and simulating the system. A numerical method called model predictive control (in linear and nonlinear flavors) can be used alongside constraints in order to create a control scheme for the reaction wheel. The only problem is the intensive computation required to apply MPCs online.
 
 ### Linearization
+To make use of linear control methods like pole placement and LQR, the system has to be linearized with respect to a point, whether it be a critical point such as an equilibrim point or the next step in a desired trajectory. To do so, a Taylor series expension will be utilized for the matrix equation. For a general state-space system
 
+$$\vec{\dot{x}} = \vec{f}(\vec{x},\vec{u},t)$$
+
+Taylor series expansion of the first order gives
+
+$$ A = \mathit{\mathbf{J}}=\left\lbrack \begin{array}{ccc}
+\frac{\partial }{\partial x_1 }\vec{f}  & \ldotp \ldotp \ldotp  & \frac{\partial }{\partial x_n }\vec{f} 
+\end{array}\right\rbrack =\left\lbrack \begin{array}{c}
+\nabla^T f_1 \\
+\vdots \\
+\nabla^T f_n 
+\end{array}\right\rbrack =\left\lbrack \begin{array}{ccc}
+\frac{\partial f_1 }{\partial x_1 } & \cdots  & \frac{\partial f_1 }{\partial x_n }\\
+\vdots  & \ddots  & \vdots \\
+\frac{\partial f_n }{\partial x_1 } & \cdots  & \frac{\partial f_n }{\partial x_n }
+\end{array}\right\rbrack$$
+
+Similarly, taking the jacobian with respect to the inputs gives us the B matrix
+
+$$B=\left\lbrack \begin{array}{ccc}
+\frac{\partial f_1 }{\partial u_1 } & \cdots  & \frac{\partial f_1 }{\partial u_m }\\
+\vdots  & \ddots  & \vdots \\
+\frac{\partial f_n }{\partial u_1 } & \cdots  & \frac{\partial f_n }{\partial u_m }
+\end{array}\right\rbrack$$
+
+Where m is the number of inputs that a system has.
 
 ### Pole Placement
 One of the simplest methods of controlling a state-space system is to apply a pole placement. This control method takes
