@@ -12,7 +12,7 @@ To start designing a controller, a model should be constructed for the system. I
 
 ### Assumptions:
 - When calculating the inertia tensor for the system, the pendulum and wheel system will be assumed to be the combination of a rod and a point mass about the origin point.
-- The 
+- The reaction wheel will be modeled as a cylindrical tube with a uniform mass.
 
 ### Reference Frames
 The first step is to draw the reference frames that will be used throughout the process. The first coordinate frame will be the "intertial" frame fixed at the origin the the $\hat{i}$ direction point to the right (horizontally) with the $\hat{j}$ direction pointing up 90 degrees from the horizontal plane, the third axis will the $\hat{k} = \hat{i} \times \hat{j}$ using the right hand rule to get a vector that is perpendicular to the first two vectors.
@@ -98,6 +98,12 @@ $$ = I_{p}\ddot{\phi}$$
 
 This gives us the equations of motion for the system. Here we can determine if we want to include $\ddot{\theta}$ as a state variable or as an input. To decrease the system order, we will use it as an input which will give is a state vector in $\mathbb{R}^2$.
 
+One last consideration is the friction about the rotation point, this can be added on as follows
+
+$$ I_{p}\ddot{\phi} = -I_w\ddot{\theta} \hat{k} + \ell m_p g sin(\phi) \hat{k} + \mu \ell \dot{\phi} \hat{k}$$
+
+Where $\mu$ is the coefficient of friction, since we are using a smooth bearing, this value will be very small.
+
 ### State-Space
 
 We will use various state-space methods to generate a control scheme for the reaction wheel, so conversion into state-space is a logical next step. To do so, we will take the state vector as
@@ -121,11 +127,23 @@ $$\dot{\vec{x}} = \left\lbrack \begin{array}{c}
 
 $$ = \left\lbrack \begin{array}{c}
 \dot{x_{2}} \\
-I_{p}^{-1} (m_m g \ell sin(\phi) - I_{w} \ddot{\theta}) \hat{k}
-\end{array}\right\rbrack
+I_{p}^{-1} (m_m g \ell sin(x_{1}) - I_{w} u - \mu x_{2}) \hat{k}
+\end{array}\right\rbrack$$
 
+Which is the state-space form of your equations of motion.
 
 ### Moments of Inertia
+
+The last part of the mathematical model is to determine the various inertia tensors that were used in the EOMs, these can easily be found using Google. This includes the inertia tensor for a cylindrical tube (reaction wheel)
+
+$$ I_{w} = \left\lbrack \begin{array}{ccc}
+\frac{1}{12}m_w \left(3\left(r_2^2 +r_1^2 \right)+h^2 \right) & 0 & 0\\
+0 & \frac{1}{12}m_w \left(3\left(r_2^2 +r_1^2 \right)+h^2 \right) & 0\\
+0 & 0 & \frac{1}{3}m_w \left(r_2^2 +r_1^2 \right)
+\end{array}\right\rbrack$$
+
+The next inertia tensor is for the pendulum assembly about the origin point, O. As mentioned before, this will be modeled as a rod with a point mass attatched to the opposite end. The inertia tensor for a rod is
+
 
 
 ## Control Laws
