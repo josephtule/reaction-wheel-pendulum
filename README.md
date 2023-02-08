@@ -13,6 +13,7 @@ To start designing a controller, a model should be constructed for the system. I
 ### Assumptions
 - When calculating the inertia tensor for the system, the pendulum and wheel system will be assumed to be the combination of a rod and a point mass about the origin point.
 - The reaction wheel will be modeled as a cylindrical tube with a uniform mass.
+- There will be other assumptions that will be brought up later as they come up in the modelling process.
 
 ### Reference Frames
 The first step is to draw the reference frames that will be used throughout the process. The first coordinate frame will be the "intertial" frame fixed at the origin the the $\hat{i}$ direction point to the right (horizontally) with the $\hat{j}$ direction pointing up 90 degrees from the horizontal plane, the third axis will be $\hat{k} = \hat{i} \times \hat{j}$ using the right hand rule to get a vector that is perpendicular to the first two vectors.
