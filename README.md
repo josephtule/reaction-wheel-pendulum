@@ -102,7 +102,7 @@ One last consideration is the friction about the rotation point, this can be add
 
 $$ I_{p}\ddot{\phi} = -I_w\ddot{\theta} \hat{k} + \ell m_p g sin(\phi) \hat{k} + \mu \ell \dot{\phi} \hat{k}$$
 
-Where $\mu$ is the coefficient of friction, since we are using a smooth bearing, this value will be very small. This uses the method shown in this video [Friction Pendulum Video:https://www.youtube.com/watch?v=SZWn7x4g-Vo]
+Where $\mu$ is the coefficient of friction, since we are using a smooth bearing, this value will be very small. This uses the method shown in this video [Friction Pendulum Video](https://www.youtube.com/watch?v=SZWn7x4g-Vo)
 ### State-Space
 
 We will use various state-space methods to generate a control scheme for the reaction wheel, so conversion into state-space is a logical next step. To do so, we will take the state vector as
