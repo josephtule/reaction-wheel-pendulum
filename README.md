@@ -97,7 +97,7 @@ $$I_w\ddot{\theta} (-\hat{k}) + \vec{\tau}_g = -I_w\ddot{\theta} \hat{k} + \ell 
 
 $$ = I_{p}\ddot{\phi}$$
 
-This gives us the equations of motion for the system. Here we can determine if we want to include $\ddot{\theta}$ as a state variable or as an input. In this case, we will be using a sensor to measure the RPM of the motor and using voltage or whichever electrical variable that will be used to control the RPM of the motor. This gives us a state vector that has three elements: $\phi$, $\dot{\phi}$, and $\dot{theta}$.
+This gives us the equations of motion for the system. Here we can determine if we want to include $\ddot{\theta}$ as a state variable or as an input. In this case, we will only care about the angle of the pendulum and its derivative. This gives us a state vector that has two elements: $\phi$ and $\dot{\phi}$. We will use a sensor on the motor to determine the angular velocity of the reaction wheel, but this will be done separately in order to validate our motor model (torque vs electrical input).
 
 One last consideration is the friction about the rotation point, this can be added on as follows
 
@@ -110,26 +110,22 @@ We will use various state-space methods to generate a control scheme for the rea
 
 $$\vec{x} = \left\lbrack \begin{array}{c}
 x_{1} \\
-x_{2} \\
-x_{3}
+x_{2}
 \end{array}\right\rbrack$$
 
 $$ = \left\lbrack \begin{array}{c}
 \phi \\
-\dot{\phi} 
-\dot{\theta}
+\dot{\phi}
 \end{array}\right\rbrack $$
 
 then taking the derivative
 
 $$\dot{\vec{x}} = \left\lbrack \begin{array}{c}
 \dot{\phi} \\
-\ddot{\phi} \\
-\ddot{\theta}
+\ddot{\phi}
 \end{array}\right\rbrack = \left\lbrack \begin{array}{c}
 \dot{x}_1 \\
-\dot{x}_2 \\
-\dot{x}_3 \\
+\dot{x}_2
 \end{array}\right\rbrack$$ 
 
 $$ = \left\lbrack \begin{array}{c}
@@ -235,11 +231,11 @@ Expand the set of binomials of the left hand side and compute the determinant of
 
 ## Estimation
 ### Measurements
-The specific sensors that will be used to measure the state of the system will be mentioned in a later section. An IMU will be used to measure the angular acceleration of the pendulum and a magnetic encoder to measure the RPM of the motor. This gives us 
+The specific sensors that will be used to measure the state of the system will be mentioned in a later section. An IMU will be used to measure the angular acceleration of the pendulum, a magnetic encoder will be assembled similarly to this [video](https://www.youtube.com/watch?v=hHTPMeXZcy0) in order to measure the position of the pendulum. Another magnetic encoder will also measure the RPM of the motor but will only be used to validate our motor model as mentioned before. This gives us 
 
 $$\vec{y}(t) = C \vec{x}(t)$$
 
-Where C is a 2-by-3 matrix with values in the row 1-column 2 position and row 2-column 3 position corresponding to the angular velocities of the pendulum and motor. These values will be determined by the calculation of raw measurement to usable data from the sensor (we could also pre-process the raw data and put ones in those positions in the C matrix).
+Where C is a 2-by-2 matrix with values on the diagonals corresponding to each sensor measuring each state variable. These values will be determined by the calculation of raw measurement to usable data from the sensor (we could also pre-process the raw data and put ones in those positions in the C matrix).
 
 ### Extended Kalman Filter
 
