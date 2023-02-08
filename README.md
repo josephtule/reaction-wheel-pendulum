@@ -175,11 +175,11 @@ $$\vec{\dot{x}} = \vec{f}(\vec{x},\vec{u})$$
 
 Taylor series expansion of the first order gives
 
-$$
-\vec{f}(\vec{x},\vec{u}) \approx \vec{f}(\vec{x}_0,\vec{u}_0) + \frac{\partial{\vec{f}}}{\partial{\vec{x}}}(\vec{x}_0,\vec{u}_0) (\vec{x} - \vec{x}_0) + \frac{\partial{\vec{f}}}{\partial{\vec{u}}} (\vec{x}_0,\vec{u}_0) (\vec{u} - \vec{u}_0) 
-$$
+$$\vec{f}(\vec{x},\vec{u}) \approx \vec{f}(\vec{x}_0,\vec{u}_0) + \frac{\partial{\vec{f}}}{\partial{\vec{x}}}(\vec{x}_0,\vec{u}_0) (\vec{x} - \vec{x}_0) + \frac{\partial{\vec{f}}}{\partial{\vec{u}}} (\vec{x}_0,\vec{u}_0) (\vec{u} - \vec{u}_0)$$
 
-$$ A = \mathit{\left\lbrack \begin{array}{ccc}
+Where the first term is zero because it is evaluated at a stationary point (may be different for a tracking case). A is the first Jacobian multiplied by the x variation, $\delta \vec{x} = \vec{x} - \vec{x}_0$, and B is the second Jacobian multiplied by the input, u, variation, $\delta \vec{u} = \vec{u} - \vec{u}_0$ (here we will just take $\vec{u}_0 = 0$).
+
+$$A=\left\lbrack \begin{array}{ccc}
 \frac{\partial }{\partial x_1 }\vec{f}  & \ldotp \ldotp \ldotp  & \frac{\partial }{\partial x_n }\vec{f} 
 \end{array}\right\rbrack =\left\lbrack \begin{array}{c}
 \nabla^T f_1 \\
