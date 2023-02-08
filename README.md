@@ -162,6 +162,8 @@ m_{\mathrm{rod}} L^2  & 0 & 0\\
 0 & 0 & \frac{1}{3}m_{\mathrm{rod}} L^2 + m_{w} L^2
 \end{array}\right\rbrack$$
 
+Since all rotations will be along the third axis ($\hat{k} = \hat{b_1} = \hat{c_1}$)
+
 ## Control
 ### Challenges
 
