@@ -15,7 +15,7 @@ To start designing a controller, a model should be constructed for the system. I
 - The reaction wheel will be modeled as a cylindrical tube with a uniform mass.
 
 ### Reference Frames
-The first step is to draw the reference frames that will be used throughout the process. The first coordinate frame will be the "intertial" frame fixed at the origin the the $\hat{i}$ direction point to the right (horizontally) with the $\hat{j}$ direction pointing up 90 degrees from the horizontal plane, the third axis will the $\hat{k} = \hat{i} \times \hat{j}$ using the right hand rule to get a vector that is perpendicular to the first two vectors.
+The first step is to draw the reference frames that will be used throughout the process. The first coordinate frame will be the "intertial" frame fixed at the origin the the $\hat{i}$ direction point to the right (horizontally) with the $\hat{j}$ direction pointing up 90 degrees from the horizontal plane, the third axis will be $\hat{k} = \hat{i} \times \hat{j}$ using the right hand rule to get a vector that is perpendicular to the first two vectors.
 
 The second set of of vectors that will be used will be defined as $\hat{b}_1$ pointing in the direction of pendulum arm, $\hat{b}_2$ 90 degrees rotated counter-clockwise in the plane of the pendulum, and $\hat{b}_3 = \hat{b}_1 \times \hat{b}_2$.
 
@@ -162,7 +162,7 @@ m_{\mathrm{rod}} L^2  & 0 & 0\\
 0 & 0 & \frac{1}{3}m_{\mathrm{rod}} L^2 + m_{w} L^2
 \end{array}\right\rbrack$$
 
-Since all rotations will be along the third axis ($\hat{k} = \hat{b}_1 = \hat{c}_1$)
+Since all rotations will be along the third axis, $\hat{k} = \hat{b}_1 = \hat{c}_1$
 
 ## Control
 ### Challenges
