@@ -183,7 +183,7 @@ $$\dot{\vec{x}}(t) = A \vec{x}(t) + B \vec{u}(t)$$
 
 The input can be substituted in resulting in
 
-$$\dot{\vec{x}}(t) = A \vec{x}(t) + B -(K \vec{x}(t)) = (A - BK)\vec{x}(t)$$
+$$\dot{\vec{x}}(t) = A \vec{x}(t) + B (-K \vec{x}(t)) = (A - BK)\vec{x}(t)$$
 
 To make the system stable, the eigenvalues of the new state-space system have to be on the open left hand plane of the complex plane. This means that the real parts of the eigenvalues have to be strictly negative in order for the system to "decay" towards a critical point (the equilibrium point found in linearizing the system). To do so, determine the characteristic equation of the new system matrix $(A - BK)$ where the values of K are underdetermined 
 
