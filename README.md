@@ -30,6 +30,21 @@ and
 
 $$\vec{r}_{OQ} = \vec{r}_{OP} + r \hat{c_1} = \ell \hat{b_1} + r \hat{c_1}$$
 
+In this problem, we're interested in the angles of 1) the pendulum, and 2) the wheel, as well as their first and second derivatives. This actually makes the previous section irrelevant (the position vectors) but I will keep them there because they look nice. 
+
+First, we will look at the reaction wheel/motor assembly as a first subsystem. Torque is generated when the reaction wheel is accelerated. The relationship between torque and the angular acceleration is as follows:
+
+$$\vec{\tau}} = I\vec{\alpha}$$
+
+where $\tau$ is the torque vector, I is the inertia tensor, and $\alpha$ is the angular acceleration vector. In our case, the relation ship is as follows:
+
+$$\vec{\tau_W}} = I_{W}\vec{\alpha{W}}$$
+
+Where the subscript W denotes a property of the reaction wheel.
+
+To get $\vec{\alpha}}$, take the derivative of the angle of an arbitrary point on the wheel, Q. Usually, if the axis of rotation didn't match an direction vector in the inertial frame, taking the derivative would require kinematic decomposition (basic kinematic equation, BKE) where
+
+$$^{i}\frac{d}{dt} ^{b}(\cdot) = ^{b} \frac{d}{dt}(\cdot) + ^{i}\omega^{b} \times ^{b}(\cdot)$$
 
 ## Control Laws
 
