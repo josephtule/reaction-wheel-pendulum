@@ -52,7 +52,7 @@ Where the subscript W denotes a property of the reaction wheel and the inertia t
 
 To get $\vec{\alpha}$, take the derivative of the angle of an arbitrary point on the wheel, Q. Usually, if the axis of rotation didn't match an direction vector in the inertial frame, taking the derivative would require kinematic decomposition (basic kinematic equation, BKE) where
 
-$$^{i}\frac{d}{dt}  ^{b}(\cdot) =  ^{b} \frac{d}{dt}(\cdot) + ^{i}\omega^{b} \times  ^{b}(\cdot)$$
+$${}^{i}\frac{d}{dt}  {}^{b}(\cdot) =  {}^{b} \frac{d}{dt}(\cdot) + {}^{i}\omega^{b} \times  {}^{b}(\cdot)$$
 
 where an i superscript denotes a derivative or object with respect to (wrt) the inertial frame, a b superscript denotes a derivative or object wrt the body frame, and $^{i}\omega^{b}$ is the angular velocity of the body frame in the inertial frame.
 
