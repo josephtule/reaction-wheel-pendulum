@@ -23,13 +23,17 @@ Similarly the last set of vectors will be $\hat{c_1}$ pointing towards an arbitr
 
 Note, $\hat{k}$, $\hat{b_3}$, and $\hat{c_3}$ are all parallel.
 
+From these reference frames as well as knowing the angles between them, rotation matrices can be created to help switch between the frames. This may or may not be used later on, but it is always good to have in your back pocket.
+
 Once the reference frames are set up, the position vectors for points of interest can be created. These position vectors will be with respect to the origin point, O. 
 
-$$\vec{r}_{OP} = \ell \hat{b_1}$$ 
+$$\vec{r}_{OP} = L \hat{b_1}$$,
+
+$$\vec{r}_{CM} = \ell \hat{b_1}$$ 
 
 and
 
-$$\vec{r}_{OQ} = \vec{r}_{OP} + r \hat{c_1} = \ell \hat{b_1} + r \hat{c_1}$$
+$$\vec{r}_{OQ} = \vec{r}_{OP} + r \hat{c_1} = L \hat{b_1} + r \hat{c_1}$$
 
 In this problem, we're interested in the angles of 1) the pendulum, and 2) the wheel, as well as their first and second derivatives. This actually makes the previous section irrelevant (the position vectors) but I will keep them there because they look nice. 
 
@@ -70,8 +74,21 @@ Here, $\ddot{\phi}$ is derived in the same manner as $\ddot{\theta}$. The next p
 
 It is known that torque due to gravity is equivalent to a moment arm with a force acting on the center of mass. Where the torque equation is given as:
 
-$$\vec{\tau} = \vec{r}_{cm} \times \vec{F}$$
+$$\vec{\tau} = \vec{r}_{CM} \times \vec{F}$$
 
+which turns into 
+
+$$\vec{\tau}_{g} = \ell \hat{b_1} \times m_p g (-\hat{j})$$
+
+Looks like we did use one of the position vectors from above. We will also use one of the rotation matrices (or a portion of it) determined above where:
+
+$$\hat{j} = cos(\phi) \hat{b_1} - sin(\phi) \hat{b_2}$$
+
+which changes our gravity torque
+
+$$\vec{\tau}_{g} = \ell \hat{b_1} \times m_p g (-(cos(\phi) \hat{b_1} - sin(\phi) \hat{b_2}))$$
+
+$$ = \ell m_p g sin(\phi) \hat{b_3} = \ell m_p g \hat{k}$$
 
 ## Control Laws
 
