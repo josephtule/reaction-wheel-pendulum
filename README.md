@@ -171,9 +171,13 @@ One of the challenges of controlling this system is the saturation of the motor.
 ### Linearization
 To make use of linear control methods like pole placement and LQR, the system has to be linearized with respect to a point, whether it be a critical point such as an equilibrim point or the next step in a desired trajectory. To do so, a Taylor series expension will be utilized for the matrix equation. For a general state-space system
 
-$$\vec{\dot{x}} = \vec{f}(\vec{x},\vec{u},t)$$
+$$\vec{\dot{x}} = \vec{f}(\vec{x},\vec{u})$$
 
 Taylor series expansion of the first order gives
+
+$$
+\vec{f}(\vec{x},\vec{u}) \approx \vec{f}(\vec{x}_0,\vec{u}_0) + \frac{\partial{\vec{f}}}{\partial{\vec{x}}}(\vec{x}_0,\vec{u}_0) (\vec{x} - \vec{x}_0) + \frac{\partial{\vec{f}}}{\partial{\vec{u}}} (\vec{x}_0,\vec{u}_0) (\vec{u} - \vec{u}_0) 
+$$
 
 $$ A = \mathit{\mathbf{J}}=\left\lbrack \begin{array}{ccc}
 \frac{\partial }{\partial x_1 }\vec{f}  & \ldotp \ldotp \ldotp  & \frac{\partial }{\partial x_n }\vec{f} 
@@ -195,7 +199,7 @@ $$B=\left\lbrack \begin{array}{ccc}
 \frac{\partial f_n }{\partial u_1 } & \cdots  & \frac{\partial f_n }{\partial u_m }
 \end{array}\right\rbrack$$
 
-Where m is the number of inputs that a system has.
+Where m is the number of inputs that a system has. For both matries, the partial derivatives will be evaluated at the determined ancor point. 
 
 ### Pole Placement
 One of the simplest methods of controlling a state-space system is to apply a pole placement. This control method takes
