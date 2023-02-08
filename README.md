@@ -18,8 +18,13 @@ The first step is to draw the reference frames that will be used throughout the 
 
 The second set of of vectors that will be used will be defined as $\hat{b_1}$ pointing in the direction of pendulum arm, $\hat{b_2}$ 90 degrees rotated counter-clockwise in the plane of the pendulum, and $\hat{b_3} = \hat{b_1} \times \hat{b_3}$.
 
-Similarly the last set of vectors will be $\hat{c_1}$ pointing towards an arbitrary point, q, on the reaction wheel. $\hat{c_2}$ 90 degrees counter-clockwise of the previous vector, and $\hat{c_3} = \hat{c_1} \times \hat{c_2}$.
+Similarly the last set of vectors will be $\hat{c_1}$ pointing towards an arbitrary point, Q, on the reaction wheel. $\hat{c_2}$ 90 degrees counter-clockwise of the previous vector, and $\hat{c_3} = \hat{c_1} \times \hat{c_2}$.
 
+Note, $\hat{k}$, $\hat{b_3}$, and $\hat{c_3}$ are all parallel.
+
+Once the reference frames are set up, the position vectors for points of interest can be created. These position vectors will be with respect to the origin point, O. 
+
+$$\vec{r_{OP}} = \ell \hat{b_1}$$ and $$\vec{r_{OQ}} = \vec{r_{OP}} + r \hat{c_1} = \ell \hat{b_1} + r \hat{c_1}$$
 
 
 ## Control Laws
