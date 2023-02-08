@@ -163,6 +163,10 @@ m_{\mathrm{rod}} L^2  & 0 & 0\\
 \end{array}\right\rbrack$$
 
 ## Control
+### Challenges
+
+One of the challenges of controlling this system is the saturation of the motor. Since motors have a maximum RPM, the motors can't accelerate higher than this limit to apply additional torque. Traditional control methods such as pole placement and LQR are unable to set contraints on the maximum RPM of the motors into account and will be seen when calculating the gains for those methods and simulating the system. A numerical method called model predictive control (in linear and nonlinear flavors) can be used alongside constraints in order to create a control scheme for the reaction wheel. The only problem is the intensive computation required to apply MPCs online.
+
 ### Linearization
 
 
@@ -183,17 +187,15 @@ To make the system stable, the eigenvalues of the new state-space system have to
 
 $$ \chi_{A}(s) = |\lambda I - A + BK| $$
 
-
 Pole placement is the act choosing the poles or eigenvalues desired for a system. Choosing stable poles causes a system to be stable. Once the stable poles are chosen (2 needed for our system), create a desired characterisitc equation and set it equal to the system characteristic equation
 
 $$ \chi_{d}(s) = (\lambda_1)(\lambda_2)...(\lambda_n) = |\lambda I - A + BK| $$
 
-Expand the set of binomials of the left hand side and compute the determinant of the right hand side then solve for the undetermined elements in the K matrix. 
+Expand the set of binomials of the left hand side and compute the determinant of the right hand side then solve for the undetermined elements in the K matrix. The numerical results can be seen below in the MATLAB results section.
 
 
 ### LQR
 ### MPC
-### Challenges
 
 ## Estimation
 ## Extended Kalman Filter
