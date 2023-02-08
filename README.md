@@ -105,7 +105,7 @@ $$\vec{x} = $$
 
 then taking the derivative
 
-$$\dot{\vec{x}} = $$
+$$\dot{\vec{x}} = $$ 
 
 ## Control Laws
 
