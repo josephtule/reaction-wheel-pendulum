@@ -34,17 +34,22 @@ In this problem, we're interested in the angles of 1) the pendulum, and 2) the w
 
 First, we will look at the reaction wheel/motor assembly as a first subsystem. Torque is generated when the reaction wheel is accelerated. The relationship between torque and the angular acceleration is as follows:
 
-$$\vec{\tau}} = I\vec{\alpha}$$
+$$\vec{\tau} = I\vec{\alpha}$$
 
 where $\tau$ is the torque vector, I is the inertia tensor, and $\alpha$ is the angular acceleration vector. In our case, the relation ship is as follows:
 
-$$\vec{\tau_W}} = I_{W}\vec{\alpha{W}}$$
+$$\vec{\tau_W} = I_{W}\vec{\alpha{W}}$$
 
 Where the subscript W denotes a property of the reaction wheel.
 
 To get $\vec{\alpha}}$, take the derivative of the angle of an arbitrary point on the wheel, Q. Usually, if the axis of rotation didn't match an direction vector in the inertial frame, taking the derivative would require kinematic decomposition (basic kinematic equation, BKE) where
 
-$$^{i}\frac{d}{dt} ^{b}(\cdot) = ^{b} \frac{d}{dt}(\cdot) + ^{i}\omega^{b} \times ^{b}(\cdot)$$
+$$^{i}\frac{d}{dt}  ^{b}(\cdot) =  ^{b} \frac{d}{dt}(\cdot) + ^{i}\omega^{b} \times  ^{b}(\cdot)$$
+
+where an i superscript denotes a derivative or object with respect to (wrt) the inertial frame, a b superscript denotes a derivative or object wrt the body frame, and $^{i}\omega^{b}$ is the angular velocity of the body frame in the inertial frame.
+
+This is not required in our case because the angular velocities are lined up with an axis of the inertial frame which makes the cross product term = 0.
+
 
 ## Control Laws
 
