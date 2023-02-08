@@ -110,22 +110,26 @@ We will use various state-space methods to generate a control scheme for the rea
 
 $$\vec{x} = \left\lbrack \begin{array}{c}
 x_{1} \\
-x_{2}
+x_{2} \\
+x_{3}
 \end{array}\right\rbrack$$
 
 $$ = \left\lbrack \begin{array}{c}
-\theta \\
-\dot{\theta} 
+\phi \\
+\dot{\phi} 
+\dot{\theta}
 \end{array}\right\rbrack $$
 
 then taking the derivative
 
 $$\dot{\vec{x}} = \left\lbrack \begin{array}{c}
-\dot{\theta} \\
-\ddot{\theta} 
+\dot{\phi} \\
+\ddot{\phi} \\
+\ddot{\theta}
 \end{array}\right\rbrack = \left\lbrack \begin{array}{c}
-\dot{x_{1}} \\
-\dot{x_{2}}
+\dot{x}_1 \\
+\dot{x}_2 \\
+\dot{x}_3 \\
 \end{array}\right\rbrack$$ 
 
 $$ = \left\lbrack \begin{array}{c}
