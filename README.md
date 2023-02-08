@@ -96,7 +96,7 @@ $$I_w\ddot{\theta} (-\hat{k}) + \vec{\tau}_g = -I_w\ddot{\theta} \hat{k} + \ell 
 
 $$ = I_{p}\ddot{\phi}$$
 
-This gives us the equations of motion for the system. Here we can determine if we want to include $\ddot{\theta}$ as a state variable or as an input. To decrease the system order, we will use it as an input which will give is a state vector in $\mathbb{R}^2$.
+This gives us the equations of motion for the system. Here we can determine if we want to include $\ddot{\theta}$ as a state variable or as an input. In this case, we will be using a sensor to measure the RPM of the motor and using voltage or whichever electrical variable that will be used to control the RPM of the motor. This gives us a state vector that has three elements: $\phi$, $\dot{\phi}$, and $\dot{theta}$.
 
 One last consideration is the friction about the rotation point, this can be added on as follows
 
@@ -200,7 +200,15 @@ Expand the set of binomials of the left hand side and compute the determinant of
 ### MPC
 
 ## Estimation
-## Extended Kalman Filter
+### Measurements
+The specific sensors that will be used to measure the state of the system will be mentioned in a later section. An IMU will be used to measure the angular acceleration of the pendulum and a magnetic encoder to measure the RPM of the motor. This gives us 
+
+$$\vec{y}(t) = C \vec{x}(t)
+
+Where C is a 2-by-3 matrix with values in the row 1-column 2 position and row 2-column 3 position corresponding to the angular velocities of the pendulum and motor. These values will be determined by the calculation of raw measurement to usable data from the sensor (we could also pre-process the raw data and put ones in those positions in the C matrix).
+
+### Extended Kalman Filter
+
 
 ## 3D Printing / CAD
 
