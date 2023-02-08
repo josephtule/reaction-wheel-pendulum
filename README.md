@@ -14,6 +14,7 @@ To start designing a controller, a model should be constructed for the system. I
 - When calculating the inertia tensor for the system, the pendulum and wheel system will be assumed to be the combination of a rod and a point mass about the origin point.
 - The 
 
+### Reference Frames
 The first step is to draw the reference frames that will be used throughout the process. The first coordinate frame will be the "intertial" frame fixed at the origin the the $\hat{i}$ direction point to the right (horizontally) with the $\hat{j}$ direction pointing up 90 degrees from the horizontal plane, the third axis will the $\hat{k} = \hat{i} \times \hat{j}$ using the right hand rule to get a vector that is perpendicular to the first two vectors.
 
 The second set of of vectors that will be used will be defined as $\hat{b_1}$ pointing in the direction of pendulum arm, $\hat{b_2}$ 90 degrees rotated counter-clockwise in the plane of the pendulum, and $\hat{b_3} = \hat{b_1} \times \hat{b_3}$.
@@ -32,15 +33,17 @@ $$\vec{r}_{OQ} = \vec{r}_{OP} + r \hat{c_1} = \ell \hat{b_1} + r \hat{c_1}$$
 
 In this problem, we're interested in the angles of 1) the pendulum, and 2) the wheel, as well as their first and second derivatives. This actually makes the previous section irrelevant (the position vectors) but I will keep them there because they look nice. 
 
+### Reaction Wheel
+
 First, we will look at the reaction wheel/motor assembly as a first subsystem. Torque is generated when the reaction wheel is accelerated. The relationship between torque and the angular acceleration is as follows:
 
 $$\vec{\tau} = I\vec{\alpha}$$
 
 where $\tau$ is the torque vector, I is the inertia tensor, and $\alpha$ is the angular acceleration vector. In our case, the relation ship is as follows:
 
-$$\vec{\tau_W} = I_{W}\vec{\alpha_{W}}$$
+$$\vec{\tau_{w}} = I_{w}\vec{\alpha_{w}}$$
 
-Where the subscript W denotes a property of the reaction wheel.
+Where the subscript W denotes a property of the reaction wheel and the inertia tensor with respect to the center of the wheel and will be a function of the mass of the wheel but not the motor because the wheel in spinning in this case and the motor is considered stationary in the c-frame.
 
 To get $\vec{\alpha}$, take the derivative of the angle of an arbitrary point on the wheel, Q. Usually, if the axis of rotation didn't match an direction vector in the inertial frame, taking the derivative would require kinematic decomposition (basic kinematic equation, BKE) where
 
@@ -52,8 +55,11 @@ This is not required in our case because the angular velocities are lined up wit
 
 $$\vec{\alpha_{W}} = \ddot{\theta} \hat{c_3} = \ddot{\theta} \hat{k}$$
 
+which gives us:
 
+$$\vec{\tau_{w}} = I_{w}\ddot{\theta} \hat{k}$$
 
+### Pendulum System
 
 ## Control Laws
 
