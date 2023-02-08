@@ -24,9 +24,11 @@ Note, $\hat{k}$, $\hat{b_3}$, and $\hat{c_3}$ are all parallel.
 
 Once the reference frames are set up, the position vectors for points of interest can be created. These position vectors will be with respect to the origin point, O. 
 
-$$\vec{r_{OP}} = \ell \hat{b_1}$$ 
+$$\vec{r}_{OP} = \ell \hat{b_1}$$ 
+
 and
-$$\vec{r_{OQ}} = \vec{r_{OP}} + r \hat{c_1} = \ell \hat{b_1} + r \hat{c_1}$$
+
+$$\vec{r}_{OQ} = \vec{r}_{OP} + r \hat{c_1} = \ell \hat{b_1} + r \hat{c_1}$$
 
 
 ## Control Laws
