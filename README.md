@@ -163,14 +163,18 @@ m_{\mathrm{rod}} L^2  & 0 & 0\\
 \end{array}\right\rbrack$$
 
 ## Control Laws
-
+### Pole Placement
+### PID
+### LQR
+### MPC
 ### Challenges
 
 ## 3D Printing / CAD
 
 ## Components
-
-## Arduino
+### Arduino
+### Motors
+### Sensors
 
 ## MATLAB Code
 
