@@ -181,12 +181,12 @@ $$\dot{\vec{x}}(t) = A \vec{x}(t) + B -(K \vec{x}(t)) = (A - BK)\vec{x}(t)$$
 
 To make the system stable, the eigenvalues of the new state-space system have to be on the open left hand plane of the complex plane. This means that the real parts of the eigenvalues have to be strictly negative in order for the system to "decay" towards a critical point (the equilibrium point found in linearizing the system). To do so, determine the characteristic equation of the new system matrix $(A - BK)$ where the values of K are underdetermined 
 
-$$ \Chi_{A}(s) = |\lambda I - A + BK| $$
+$$ \chi_{A}(s) = |\lambda I - A + BK| $$
 
 
 Pole placement is the act choosing the poles or eigenvalues desired for a system. Choosing stable poles causes a system to be stable. Once the stable poles are chosen (2 needed for our system), create a desired characterisitc equation and set it equal to the system characteristic equation
 
-$$ \Chi_{d}(s) = (\lambda_1)(\lambda_2)...(\lambda_n) = |\lambda I - A + BK| $$
+$$ \chi_{d}(s) = (\lambda_1)(\lambda_2)...(\lambda_n) = |\lambda I - A + BK| $$
 
 Expand the set of binomials of the left hand side and compute the determinant of the right hand side then solve for the undetermined elements in the K matrix. 
 
