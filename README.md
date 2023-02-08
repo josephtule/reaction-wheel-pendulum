@@ -246,6 +246,10 @@ Where C is a 2-by-2 matrix with values on the diagonals corresponding to each se
 ### Arduino
 ### Motors
 ### Sensors
+#### MPU6050
+
+#### AS5600
+The AS5600 is a magnetic encoder that is able to measure the orientation of a rotating magnet with placed close to the IC.
 
 ## Build
 
