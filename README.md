@@ -14,7 +14,13 @@ To start designing a controller, a model should be constructed for the system. I
 - When calculating the inertia tensor for the system, the pendulum and wheel system will be assumed to be the combination of a rod and a point mass about the origin point.
 - The 
 
-The first step is to draw the reference frames that will be used throughout the process. The first coordinate frame will be the "intertial" frame fixed at the origin the the $$\hat{i}$$ direction point to the right (horizontally) with the $$\hat{j}$$ direction pointing up 90 degrees from the horizontal plane, the third axis will the $$\hat{k}$$ = $$\hat{i} \times \hat{j}$$ using the right hand rule to get a vector that is perpendicular to the first two vectors.
+The first step is to draw the reference frames that will be used throughout the process. The first coordinate frame will be the "intertial" frame fixed at the origin the the $\hat{i}$ direction point to the right (horizontally) with the $\hat{j}$ direction pointing up 90 degrees from the horizontal plane, the third axis will the $\hat{k} = \hat{i} \times \hat{j}$ using the right hand rule to get a vector that is perpendicular to the first two vectors.
+
+The second set of of vectors that will be used will be defined as $\hat{b_1}$ pointing in the direction of pendulum arm, $\hat{b_2}$ 90 degrees rotated counter-clockwise in the plane of the pendulum, and $\hat{b_3} = \hat{b_1} \times \hat{b_3}$.
+
+Similarly the last set of vectors will be $\hat{c_1}$ pointing towards an arbitrary point, q, on the reaction wheel. $\hat{c_2}$ 90 degrees counter-clockwise of the previous vector, and $\hat{c_3} = \hat{c_1} \times \hat{c_2}$.
+
+
 
 ## Control Laws
 
