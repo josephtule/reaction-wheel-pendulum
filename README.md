@@ -203,7 +203,7 @@ Expand the set of binomials of the left hand side and compute the determinant of
 ### Measurements
 The specific sensors that will be used to measure the state of the system will be mentioned in a later section. An IMU will be used to measure the angular acceleration of the pendulum and a magnetic encoder to measure the RPM of the motor. This gives us 
 
-$$\vec{y}(t) = C \vec{x}(t)
+$$\vec{y}(t) = C \vec{x}(t)$$
 
 Where C is a 2-by-3 matrix with values in the row 1-column 2 position and row 2-column 3 position corresponding to the angular velocities of the pendulum and motor. These values will be determined by the calculation of raw measurement to usable data from the sensor (we could also pre-process the raw data and put ones in those positions in the C matrix).
 
