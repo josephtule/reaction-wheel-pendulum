@@ -145,7 +145,7 @@ $$ I_{w} = \left\lbrack \begin{array}{ccc}
 0 & 0 & \frac{1}{3}m_w \left(r_2^2 +r_1^2 \right)
 \end{array}\right\rbrack$$
 
-The next inertia tensor is for the pendulum assembly about the origin point, O. As mentioned before, this will be modeled as a rod with a point mass attatched to the opposite end. The inertia tensor for a rod with a point mass at the is
+The next inertia tensor is for the pendulum assembly about the origin point, O. As mentioned before, this will be modeled as a rod with a point mass attatched to the opposite end. The inertia tensor for a rod with a point mass at the end about the point O is
 
 $$I_p = \left\lbrack \begin{array}{ccc}
 m_{\mathrm{rod}} L^2  & 0 & 0\\
