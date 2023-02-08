@@ -1,2 +1,17 @@
-# reaction-wheel-pendulum
-Control of a simple pendulum using a reaction wheel
+# Control of a Pendulum via Reaction Wheel
+
+## Motivation
+
+## Equations of Motion
+
+## Control Laws
+
+## 3D Printing / CAD
+
+## Components
+
+## Arduino
+
+## MATLAB Code
+
+## Arduino Code
