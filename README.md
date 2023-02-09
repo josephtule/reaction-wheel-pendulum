@@ -54,7 +54,7 @@ To get $\vec{\alpha}$, take the derivative of the angle of an arbitrary point on
 
 $${}^{i}\frac{d}{dt}  {}^{b}(\cdot) =  {}^{b} \frac{d}{dt}(\cdot) + {}^{i}\omega^{b} \times  {}^{b}(\cdot)$$
 
-where an i superscript denotes a derivative or object with respect to (wrt) the inertial frame, a b superscript denotes a derivative or object wrt the body frame, and $^{i}\omega^{b}$ is the angular velocity of the body frame in the inertial frame. The equation for the torque of the motor is derived from the velocity constant, $\K_v$ that relates the velocity to the voltage for a brushed DC motor in the form
+where an i superscript denotes a derivative or object with respect to (wrt) the inertial frame, a b superscript denotes a derivative or object wrt the body frame, and $^{i}\omega^{b}$ is the angular velocity of the body frame in the inertial frame. The equation for the torque of the motor is derived from the velocity constant, $K_v$ that relates the velocity to the voltage for a brushed DC motor in the form
 
 $$RPM = K_v * V$$ 
 
@@ -103,7 +103,7 @@ $$ = \ell m_p g sin(\phi) \hat{b}_3 = \ell m_p g sin(\phi) \hat{k}$$
 
 Where $m_p$ is the mass of the pendulum arm, the motor, and the reaction wheel. Substituting this back into our pendulum torque gives us 
 
-$$I_w\ddot{\theta} (-\hat{k}) + \vec{\tau}_g = -I_w\ddot{\theta} \hat{k} + \ell m_p g sin(\phi) \hat{k}$$
+$$I_w\ddot{\theta} (-\hat{k}) + \vec{\tau}_g = -(\frac{K_{tau}}{R_{i}} V - \frac{K_{tau}^2}{R_{i}} \dot{\theta}) \hat{k} + \ell m_p g sin(\phi) \hat{k}$$
 
 $$ = I_{p}\ddot{\phi}$$
 
@@ -111,7 +111,7 @@ This gives us the equations of motion for the system. Here we can determine if w
 
 One last consideration is the friction about the rotation point, this can be added on as follows
 
-$$ I_{p}\ddot{\phi} = -I_w\ddot{\theta} \hat{k} + \ell m_p g sin(\phi) \hat{k} + \mu L \dot{\phi} \hat{k}$$
+$$ I_{p}\ddot{\phi} = -(\frac{K_{tau}}{R_{i}} V - \frac{K_{tau}^2}{R_{i}} \dot{\theta})\hat{k} + \ell m_p g sin(\phi) \hat{k} + \mu L \dot{\phi} \hat{k}$$
 
 Where $\mu$ is the coefficient of friction, since we are using a smooth bearing, this value will be very small. This uses the method shown in this video [Friction Pendulum Video](https://www.youtube.com/watch?v=SZWn7x4g-Vo)
 ### State-Space
@@ -140,7 +140,7 @@ $$\dot{\vec{x}} = \left\lbrack \begin{array}{c}
 
 $$ = \left\lbrack \begin{array}{c}
 \dot{x_{2}} \\
-I_{p}^{-1} (m_m g \ell sin(x_{1}) - \mu \ell x_{2} - I_{w} u) \hat{k}
+I_{p}^{-1} (m_m g \ell sin(x_{1}) - \mu \ell x_{2} - \frac{K_{tau}}{R_{i}} V - \frac{K_{tau}^2}{R_{i}} \dot{\theta}
 \end{array}\right\rbrack$$
 
 Which is the state-space form of your equations of motion.
