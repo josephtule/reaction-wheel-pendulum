@@ -42,27 +42,37 @@ In this problem, we're interested in the angles of 1) the pendulum, and 2) the w
 
 First, we will look at the reaction wheel/motor assembly as a first subsystem. Torque is generated when the reaction wheel is accelerated. The relationship between torque and the angular acceleration is as follows:
 
-$$\vec{\tau} = I\vec{\alpha}$$
+$$\vec{\tau} = I\vec{\alpha} $$
 
-where $\tau$ is the torque vector, I is the inertia tensor, and $\alpha$ is the angular acceleration vector. In our case, the relation ship is as follows
+where $\tau$ is the torque vector and I is the inertia tensor, and $\alpha$ is the angular acceleration vector. In our case, the relation ship is as follows
 
-$$\vec{\tau}_w = I_{w}\vec{\alpha}_w$$
+$$\vec{\tau}_w = I_{w}\vec{\alpha}_w = \frac{K_{tau}}{R_{i}} V - \frac{K_{tau}^2}{R_{i}} \dot{\theta} $$
 
-Where the subscript W denotes a property of the reaction wheel and the inertia tensor with respect to the center of the wheel and will be a function of the mass of the wheel but not the motor because the wheel in spinning in this case and the motor is considered stationary in the c-frame.
+Where the subscript W denotes a property of the reaction wheel, $\theta$ is the angular velocity of the motor, $\K_{\tau}$ is the torque constant of the motor, and $R_{i}$ is the interal resistance of the motor. The inertia tensor with respect to the center of the wheel and will be a function of the mass of the wheel but not the motor because the wheel in spinning in this case and the motor is considered stationary in the c-frame.
 
 To get $\vec{\alpha}$, take the derivative of the angle of an arbitrary point on the wheel, Q. Usually, if the axis of rotation didn't match an direction vector in the inertial frame, taking the derivative would require kinematic decomposition (basic kinematic equation, BKE) where
 
 $${}^{i}\frac{d}{dt}  {}^{b}(\cdot) =  {}^{b} \frac{d}{dt}(\cdot) + {}^{i}\omega^{b} \times  {}^{b}(\cdot)$$
 
-where an i superscript denotes a derivative or object with respect to (wrt) the inertial frame, a b superscript denotes a derivative or object wrt the body frame, and $^{i}\omega^{b}$ is the angular velocity of the body frame in the inertial frame.
+where an i superscript denotes a derivative or object with respect to (wrt) the inertial frame, a b superscript denotes a derivative or object wrt the body frame, and $^{i}\omega^{b}$ is the angular velocity of the body frame in the inertial frame. The equation for the torque of the motor is derived from the velocity constant, $\K_v$ that relates the velocity to the voltage for a brushed DC motor in the form
 
-This is not required in our case because the angular velocities are lined up with an axis of the inertial frame which makes the cross product term = 0. Taking this derivative gives us
+$$RPM = K_v * V$$ 
+
+converting this to rad/s
+
+$$ \omega = 2 \pi K_v / 60 $$
+
+and converting to the torque constant
+
+$$ K_{\tau} = \frac{1}{K_{v,rad/s}} $$
+
+Usually taking derivatives in rotating frames requires the use of the BKE but is not required in our case because the angular velocities are lined up with an axis of the inertial frame which makes the cross product term = 0. Taking this derivative gives us
 
 $$\vec{\alpha}_{w} = \ddot{\theta} \hat{c}_{3} = \ddot{\theta} \hat{k}$$
 
 which gives us
 
-$$\vec{\tau}_{w} = I_{w}\ddot{\theta} \hat{k}$$
+$$\vec{\tau}_{w} = I_{w}\ddot{\theta} \hat{k} = \frac{K_{tau}}{R_{i}} V - \frac{K_{tau}^2}{R_{i}} \dot{\theta} $$
 
 ### Pendulum System
 
