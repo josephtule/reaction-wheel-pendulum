@@ -231,7 +231,7 @@ $$B = \left(\begin{array}{c}
 \frac{K_t }{I_w \,R_i }
 \end{array}\right)$$
 
-Here, the matrices will be evaluated at the equilibrium point which can be inferred to be either when the pendulum is pointed straight up or straight down (0 degrees or 180 degrees) and all rates are equal to zero ($\dot{\phi} = \dot{\theta} = 0).
+Here, the matrices will be evaluated at the equilibrium point which can be inferred to be either when the pendulum is pointed straight up or straight down (0 degrees or 180 degrees) and all rates are equal to zero, $\dot{\phi} = \dot{\theta} = 0$.
 
 ### Pole Placement
 One of the simplest methods of controlling a state-space system is to apply a pole placement. This control method takes
