@@ -101,7 +101,7 @@ This gives us the equations of motion for the system. Here we can determine if w
 
 One last consideration is the friction about the rotation point, this can be added on as follows
 
-$$ I_{p}\ddot{\phi} = -I_w\ddot{\theta} \hat{k} + \ell m_p g sin(\phi) \hat{k} + \mu \ell \dot{\phi} \hat{k}$$
+$$ I_{p}\ddot{\phi} = -I_w\ddot{\theta} \hat{k} + \ell m_p g sin(\phi) \hat{k} + \mu \L \dot{\phi} \hat{k}$$
 
 Where $\mu$ is the coefficient of friction, since we are using a smooth bearing, this value will be very small. This uses the method shown in this video [Friction Pendulum Video](https://www.youtube.com/watch?v=SZWn7x4g-Vo)
 ### State-Space
