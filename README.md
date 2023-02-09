@@ -46,7 +46,7 @@ $$\vec{\tau} = I\vec{\alpha} $$
 
 where $\tau$ is the torque vector and I is the inertia tensor, and $\alpha$ is the angular acceleration vector. In our case, the relation ship is as follows
 
-$$\vec{\tau}_w = I_{w}\vec{\alpha}_w = \frac{K_{tau}}{R_{i}} V - \frac{K_{tau}^2}{R_{i}} \dot{\theta} $$
+$$\vec{\tau}_w = I_{w}\vec{\alpha}_w = \frac{K_{\tau}}{R_{i}} V - \frac{K_{\tau}^2}{R_{i}} \dot{\theta} $$
 
 Where the subscript W denotes a property of the reaction wheel, $\theta$ is the angular velocity of the motor, $\K_{\tau}$ is the torque constant of the motor, and $R_{i}$ is the interal resistance of the motor. The inertia tensor with respect to the center of the wheel and will be a function of the mass of the wheel but not the motor because the wheel in spinning in this case and the motor is considered stationary in the c-frame.
 
@@ -114,6 +114,7 @@ One last consideration is the friction about the rotation point, this can be add
 $$ I_{p}\ddot{\phi} = -(\frac{K_{tau}}{R_{i}} V - \frac{K_{tau}^2}{R_{i}} \dot{\theta})\hat{k} + \ell m_p g sin(\phi) \hat{k} + \mu L \dot{\phi} \hat{k}$$
 
 Where $\mu$ is the coefficient of friction, since we are using a smooth bearing, this value will be very small. This uses the method shown in this video [Friction Pendulum Video](https://www.youtube.com/watch?v=SZWn7x4g-Vo)
+
 ### State-Space
 
 We will use various state-space methods to generate a control scheme for the reaction wheel, so conversion into state-space is a logical next step. To do so, we will take the state vector as
@@ -125,17 +126,20 @@ x_{2}
 
 $$ = \left\lbrack \begin{array}{c}
 \phi \\
-\dot{\phi}
+\dot{\phi} \\ 
+\dot{\theta}
 \end{array}\right\rbrack $$
 
 then taking the derivative
 
 $$\dot{\vec{x}} = \left\lbrack \begin{array}{c}
 \dot{\phi} \\
-\ddot{\phi}
+\ddot{\phi}\\
+\ddot{\theta}
 \end{array}\right\rbrack = \left\lbrack \begin{array}{c}
 \dot{x}_1 \\
-\dot{x}_2
+\dot{x}_2 \\ 
+\dot{x}_3
 \end{array}\right\rbrack$$ 
 
 $$ = \left\lbrack \begin{array}{c}
