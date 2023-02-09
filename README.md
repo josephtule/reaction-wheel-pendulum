@@ -264,9 +264,11 @@ Expand the set of binomials of the left hand side and compute the determinant of
 ### Measurements
 The specific sensors that will be used to measure the state of the system will be mentioned in a later section. An IMU will be used to measure the angular acceleration of the pendulum, a magnetic encoder will be assembled similarly to this [video](https://www.youtube.com/watch?v=hHTPMeXZcy0) in order to measure the position of the pendulum. Another magnetic encoder will also measure the RPM of the motor but will only be used to validate our motor model as mentioned before. This gives us 
 
-$$\vec{y}(t) = C \vec{x}(t)$$
+$$\vec{y}(t) = C \vec{x}(t) = \left(\begin{array}{c}
+1 & 0 & 0
+\end{array}\right)$$
 
-Where C is a 2-by-2 matrix with values on the diagonals corresponding to each sensor measuring each state variable. These values will be determined by the calculation of raw measurement to usable data from the sensor (we could also pre-process the raw data and put ones in those positions in the C matrix).
+Where C is a 1-by-3 matrix a one in the first entry as represent that we are only measuring the angle of the pendulum. These values will be determined by the calculation of processed measurement to usable data from the sensor.
 
 ### Extended Kalman Filter
 
