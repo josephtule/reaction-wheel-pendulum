@@ -266,7 +266,7 @@ The specific sensors that will be used to measure the state of the system will b
 
 $$\vec{y}(t) = C \vec{x}(t) = \left(\begin{array}{c}
 1 & 0 & 0
-\end{array}\right)$$
+\end{array}\right) \vec{x}(t)$$
 
 Where C is a 1-by-3 matrix a one in the first entry as represent that we are only measuring the angle of the pendulum. These values will be determined by the calculation of processed measurement to usable data from the sensor.
 
