@@ -241,17 +241,35 @@ Where C is a 2-by-2 matrix with values on the diagonals corresponding to each se
 
 
 ## 3D Printing / CAD
+Disclaimer: I am pretty bad at using CAD and creating models so these models may be terrible.
 
 ## Components
+The section on the modeling took about a day to derive, formulate, and implement in MATLAB since I focused on dynamics and control in my undergrad. Bear with me with all this Arduino and electronics stuff, I'm trying to learn this on the fly to be able to implement all of this stuff.
+
 ### Arduino
 ### Motors
+The motor that I chose is the A2212, I picked this because it came in a [4-pack](https://www.amazon.com/dp/B06WW9KTH4?psc=1&ref=ppx_yo2ov_dt_b_product_details), it was cheapish, and I don't know much about motors and how to cherry pick them based on performance. The ESCs in the pack are actually useless for this project since they are not bidirectional so I picked up another one that has bidirectional functionality (detailed in the next section). 
+
+These motors have a Kv value (velocity constant) of 1000 so they have a theoretical maximum speed of about 11000 RPM (with the use of a 3S li-po battery = 11.1V).
+
+### ESC (Electronic Speed Control)
+Aparently it's not good for the health of a motor and the ESC to reverse the motor that is already moving without it fully stopping, but I really don't intend for this project to last long so we'll go ahead and use this to be able to reverse the motor in order to change the direction of the torque of the reaction wheel. This specific ESC is a 30 amp ESC that advertises 1:1 power in both directions. It's controlled by a PWM signal (supplied by an Arduino) and has a deadzone somewhere in the middle of the maximum and minimum PWM signal which will have to be measured, this won't be taken into account with the control generation, but hopefully the control methods are robust enough to be able to overcome this with while only slightly affecting the performance.
+
+#### ESC Functions (Arduino)
+
 ### Sensors
 #### MPU6050
+The MPU 6050 is an integrated circut (IC) that contains a gyroscope and accelerometer. This means it can measure the angular rates and acceleration that its subject to. 
+##### MPU6050 Functions (Arduino)
 
 #### AS5600
 The AS5600 is a magnetic encoder that is able to measure the orientation of a rotating magnet with placed close to the IC.
 
+##### AS5600 Functions (Arduino)
+
 ## Build
+### Wiring
+### Assembly
 
 ## Parameters
 Pendulum Arm Mass:
