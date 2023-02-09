@@ -107,7 +107,7 @@ $$I_w\ddot{\theta} (-\hat{k}) + \vec{\tau}_g = -(\frac{K_{tau}}{R_{i}} V - \frac
 
 $$ = I_{p}\ddot{\phi}$$
 
-This gives us the equations of motion for the system. Here we can determine if we want to include $\ddot{\theta}$ as a state variable or as an input. In this case, we will only care about the angle of the pendulum and its derivative. This gives us a state vector that has two elements: $\phi$ and $\dot{\phi}$. We will use a sensor on the motor to determine the angular velocity of the reaction wheel, but this will be done separately in order to validate our motor model (torque vs electrical input).
+This gives us the two equations of motion for the system with (including the equation of motion for the reaction wheel itself). Here we can determine if we want to include $\ddot{\theta}$ as a state variable or as an input. In this case, we will only care about the angle of the pendulum and its derivative. This gives us a state vector that has two elements: $\phi$ and $\dot{\phi}$. We will use a sensor on the motor to determine the angular velocity of the reaction wheel, but this will be done separately in order to validate our motor model (torque vs electrical input).
 
 One last consideration is the friction about the rotation point, this can be added on as follows
 
@@ -144,7 +144,8 @@ $$\dot{\vec{x}} = \left\lbrack \begin{array}{c}
 
 $$ = \left\lbrack \begin{array}{c}
 \dot{x_{2}} \\
-I_{p}^{-1} (m_m g \ell sin(x_{1}) - \mu \ell x_{2} - \frac{K_{tau}}{R_{i}} V - \frac{K_{tau}^2}{R_{i}} \dot{\theta}
+I_{p}^{-1} (m_m g \ell sin(x_{1}) - \mu \ell x_{2} - \frac{K_{tau}}{R_{i}} V - \frac{K_{tau}^2}{R_{i}} \dot{\theta}\\
+(K_t * u / R_i - K_t^2 * \dot{\theta} / R_i) / I_w 
 \end{array}\right\rbrack$$
 
 Which is the state-space form of your equations of motion.
@@ -215,6 +216,22 @@ $$B=\left\lbrack \begin{array}{ccc}
 \end{array}\right\rbrack$$
 
 Where m is the number of inputs that a system has. For both matries, the partial derivatives will be evaluated at the determined ancor point. 
+
+Doing these partial derivatives gives the following A and B matrices
+
+$$A =  \left(\begin{array}{ccc}
+0 & 1 & 0\\
+\frac{g\,l\,\cos \left(x_1 \right)\,{\left(m_L +m_m +m_w \right)}}{I_p } & 0 & \frac{{K_t }^2 }{I_p \,R_i }\\
+0 & 0 & -\frac{{K_t }^2 }{I_w \,R_i }
+\end{array}\right)$$
+
+$$B = \left(\begin{array}{c}
+0\\
+-\frac{K_t }{I_p \,R_i }\\
+\frac{K_t }{I_w \,R_i }
+\end{array}\right)$$
+
+Here, the matrices will be evaluated at the equilibrium point which can be inferred to be either when the pendulum is pointed straight up or straight down (0 degrees or 180 degrees) and all rates are equal to zero ($\dot{\phi} = \dot{\theta} = 0).
 
 ### Pole Placement
 One of the simplest methods of controlling a state-space system is to apply a pole placement. This control method takes
