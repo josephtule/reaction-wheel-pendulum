@@ -48,7 +48,7 @@ where $\tau$ is the torque vector and I is the inertia tensor, and $\alpha$ is t
 
 $$\vec{\tau}_w = I_{w}\vec{\alpha}_w = \frac{K_{\tau}}{R_{i}} V - \frac{K_{\tau}^2}{R_{i}} \dot{\theta} $$
 
-Where the subscript W denotes a property of the reaction wheel, $\theta$ is the angular velocity of the motor, $\K_{\tau}$ is the torque constant of the motor, and $R_{i}$ is the interal resistance of the motor. The inertia tensor with respect to the center of the wheel and will be a function of the mass of the wheel but not the motor because the wheel in spinning in this case and the motor is considered stationary in the c-frame.
+Where the subscript W denotes a property of the reaction wheel, $\theta$ is the angular velocity of the motor, $K_{\tau}$ is the torque constant of the motor, and $R_{i}$ is the interal resistance of the motor. The inertia tensor with respect to the center of the wheel and will be a function of the mass of the wheel but not the motor because the wheel in spinning in this case and the motor is considered stationary in the c-frame.
 
 To get $\vec{\alpha}$, take the derivative of the angle of an arbitrary point on the wheel, Q. Usually, if the axis of rotation didn't match an direction vector in the inertial frame, taking the derivative would require kinematic decomposition (basic kinematic equation, BKE) where
 
