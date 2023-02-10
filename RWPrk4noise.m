@@ -54,7 +54,7 @@ params.A = A; params.B = B; params.K = K;
 options = odeset('RelTol',1e-11,'AbsTol',1e-11);
 % tspan = [0,5];
 tspan = linspace(0,5,2^12); t = tspan;
-x0 = [0;0;0];
+x0 = [.2;0;0];
 % [t,x] = ode45(@(t,x) nleoms(t,x,params),tspan,x0,options);
 % [t,x] = ode45(@(t,x) nleoms(t,x,params),tspan,x0);
 x = rk4(@(t,x) nleoms(tspan,x,params),t,x0);
@@ -143,7 +143,7 @@ for i = 1:(n-1)
     k_2 = f(t(i)+0.5*h,x(:,i)+0.5*h*k_1);
     k_3 = f((t(i)+0.5*h),(x(:,i)+0.5*h*k_2));
     k_4 = f((t(i)+h),(x(:,i)+k_3*h));
-    x(:,i+1) = x(:,i) + (1/6)*(k_1+2*k_2+2*k_3+k_4)*h + .001*randn(size(x0));
+    x(:,i+1) = x(:,i) + (1/6)*(k_1+2*k_2+2*k_3+k_4)*h + .0005*randn(size(x0));
 
 end
 x = x.';
