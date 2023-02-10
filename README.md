@@ -233,6 +233,8 @@ $$B = \left(\begin{array}{c}
 
 Here, the matrices will be evaluated at the equilibrium point which can be inferred to be either when the pendulum is pointed straight up or straight down (0 degrees or 180 degrees) and all rates are equal to zero, $\dot{\phi} = \dot{\theta} = 0$.
 
+To even begin to think about creating linear control schemes, we have to check if the linear system is even controllable and observable.
+
 ### Pole Placement
 One of the simplest methods of controlling a state-space system is to apply a pole placement. This control method takes
 
@@ -258,6 +260,15 @@ Expand the set of binomials of the left hand side and compute the determinant of
 
 
 ### LQR
+
+Like in the case for pole placement, LQR also utilizes inputs of the form $\vec{u}(t) = -K\vec{x}(t)$. The difference lies in the method of calculation of the K matrix. Solving for the gains involves the use of optimization where the cost function is (for the infinite horizon case)
+
+$$J(x_0,u) = \int_{t_0 }^{\infty} x^T Q x + u^T R u\;dt$$
+
+Here, we want to minimie the cost function while also subjecting it to the linearized dynamics of the system, $\dot{\vec{x}} = A\vec{x} + B\vec{u}$. To do so, it is important to note that the form of the cost function is an algebraic Riccati equation
+
+$$ J = $$
+
 ### MPC
 
 ## Estimation
