@@ -128,7 +128,7 @@ if x(1) > maxstab % enable swing up
         u = params.umax;
     elseif x(2) > 0 % swinging CCW
 %         u = -params.umax;
-        u = 0; % can only this way for some reason lol, need to figure out some modulus math so that it can stabilize from the other side as well.
+        u = 0; % can only swing up in this direction for some reason lol, need to figure out some modulus math so that it can stabilize from the other side as well.
     end
 elseif abs(x(1)) <= maxstab % enable stabilization
     if t < 0
