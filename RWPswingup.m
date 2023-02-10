@@ -1,4 +1,5 @@
 clear all;
+set(groot,'defaulttextInterpreter','latex');
 syms phi_ddot phi_dot phi theta_ddot theta_dot V
 syms I_w I_p I_L l L m_w m_L g r_1 r_2 m_m K_v K_t R_i
 syms x_1 x_2 x_3
@@ -53,7 +54,7 @@ params.A = A; params.B = B; params.K = K;
 options = odeset('RelTol',1e-11,'AbsTol',1e-11);
 % tspan = [0,5];
 tspan = linspace(0,5,2^12);
-x0 = [.5;0;0];
+x0 = [.3;0;0];
 % [t,x] = ode45(@(t,x) nleoms(t,x,params),tspan,x0,options);
 [t,x] = ode45(@(t,x) nleoms(t,x,params),tspan,x0);
 
@@ -66,18 +67,18 @@ if max(x(:,1) > 2.5)
     plot(t,pi*ones(size(t)))
 end
 grid on
-ylabel("x_1 = \phi")
+ylabel("$x_1 = \phi$")
 hold off
 subplot(3,1,2)
 hold on
 plot(t,x(:,2))
 grid on
-ylabel("x_2 = \dot(\phi)")
+ylabel("$x_2 = \dot{\phi}$")
 hold off
 subplot(3,1,3)
 plot(t,x(:,3))
 grid on
-ylabel("x_3 = \dot(\phi)")
+ylabel("$x_3 = \dot{\theta}$")
 hold off
 
 % r = L*[-sin(x(:,1)) , cos(x(:,1))];
