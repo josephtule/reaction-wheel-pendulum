@@ -29,7 +29,7 @@ I_p = I_L + I_PM;
 
 % Physical Properties (change these)
 m_w = 25/1000; m_m = 230/1000; m_L = 150/1000; L = .25; l = .75*L; r_1 = .15; r_2 = .16; g = 9.81;
-rpmamx = 35000; motorvolt = 12; batteryvolt = 11.1; motorresist = 0.13; bearingcof = 0.025;
+rpmmax = 35000; motorvolt = 12; batteryvolt = 11.1; motorresist = 0.13; bearingcof = 0.025;
 
 % Calculations
 params.g = g; 
