@@ -27,17 +27,22 @@ I_L = 1/3 * m_L * L^2;
 I_PM = (m_w + m_m)*L^2;
 I_p = I_L + I_PM;
 
+% Physical Properties (change these)
 m_w = 25/1000; m_m = 230/1000; m_L = 150/1000; L = .25; l = .75*L; r_1 = .15; r_2 = .16; g = 9.81;
+rpmamx = 35000; motorvolt = 12; batteryvolt = 11.1; motorresist = 0.13; bearingcof = 0.025;
+
+% Calculations
+params.g = g; 
 params.I_p = eval(subs(I_p,sym([m_w,m_L,L]),[m_w,m_L,L]));
 params.I_w = eval(subs(I_w,sym([m_w,r_1,r_2]),[m_w,r_1,r_2]));
-params.g = 9.81; params.m_w = m_w; params.m_L = m_L; params.L = L; params.l = l; params.m_m = m_m;
-params.m_p = params.m_m + params.m_w + params.m_L; params.umax = 11.1;
-params.mu = .025; params.K_v = 35000/12; params.K_t = 60 / 2 / pi / params.K_v; params.R_i = .13; % ohms
-
+params.m_w = m_w; params.m_L = m_L; params.L = L; params.l = l; params.m_m = m_m;
+params.m_p = params.m_m + params.m_w + params.m_L; params.umax = batteryvolt;
+params.mu = bearingcof; params.K_v = rpmmax/motorvolt; params.K_t = 60 / 2 / pi / params.K_v; params.R_i = motorresist; % ohms
 phi_e = 0;
 A = matlabFunction(As); A = A(params.I_p,params.I_w,params.K_t,params.R_i,...
     params.g,params.l,params.m_L,params.m_m,params.m_w,phi_e)
 B = matlabFunction(Bs); B = B(params.I_p,params.I_w,params.K_t,params.R_i)
+
 
 % K = lqr(A,B,diag([50 10 15]),.5)
 K = place(A,B,[-5,-2,-4])
