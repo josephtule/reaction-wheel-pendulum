@@ -252,7 +252,7 @@ $$ \chi_{A}(\lambda) = |\lambda I - A + BK| $$
 
 Pole placement is the act choosing the poles or eigenvalues desired for a system. Choosing stable poles causes a system to be stable. Once the stable poles are chosen (2 needed for our system), create a desired characterisitc equation and set it equal to the system characteristic equation
 
-$$ \chi_{d}(\lambda) = (\lambda_1)(\lambda_2)...(\lambda_n) = |\lambda I - A + BK| $$
+$$ \chi_{d}(\lambda) = (\lambda - \lambda_1)(\lambda - \lambda_2)...(\lambda - \lambda_n) = |\lambda I - A + BK| $$
 
 Expand the set of binomials of the left hand side and compute the determinant of the right hand side then solve for the undetermined elements in the K matrix. The numerical results can be seen below in the MATLAB results section.
 
