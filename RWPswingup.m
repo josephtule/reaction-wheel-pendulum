@@ -43,22 +43,22 @@ A = matlabFunction(As); A = A(params.I_p,params.I_w,params.K_t,params.R_i,...
     params.g,params.l,params.m_L,params.m_m,params.m_w,phi_e)
 B = matlabFunction(Bs); B = B(params.I_p,params.I_w,params.K_t,params.R_i)
 
-
+% Control Gain Calculations (switch between methods and change parameters within)
 % K = lqr(A,B,diag([50 10 15]),.5)
 K = place(A,B,[-5,-2,-4])
 % % K = [-6 -.2]
 params.A = A; params.B = B; params.K = K;
 
-
-
+% ODE45 for simulation
 options = odeset('RelTol',1e-11,'AbsTol',1e-11);
 % tspan = [0,5];
 tspan = linspace(0,5,2^12);
 x0 = [.5;0;0];
-
-figure()
 % [t,x] = ode45(@(t,x) nleoms(t,x,params),tspan,x0,options);
 [t,x] = ode45(@(t,x) nleoms(t,x,params),tspan,x0);
+
+% Plotting Results
+figure()
 subplot(3,1,1)
 hold on
 plot(t,x(:,1))
@@ -66,15 +66,18 @@ if max(x(:,1) > 2.5)
     plot(t,pi*ones(size(t)))
 end
 grid on
+ylabel("x_1 = \phi")
 hold off
 subplot(3,1,2)
 hold on
 plot(t,x(:,2))
 grid on
+ylabel("x_2 = \dot(\phi)")
 hold off
 subplot(3,1,3)
 plot(t,x(:,3))
 grid on
+ylabel("x_3 = \dot(\phi)")
 hold off
 
 % r = L*[-sin(x(:,1)) , cos(x(:,1))];
