@@ -29,16 +29,20 @@ I_PM = (m_w + m_m)*L^2;
 I_p = I_L + I_PM;
 
 % Physical Properties (change these)
-m_w = 25/1000; m_m = 230/1000; m_L = 150/1000; L = .25; l = .75*L; r_1 = .15; r_2 = .16; g = 9.81;
+m_w = 25/1000; m_m = 230/1000; m_L = 100/1000; L = .25; l = .75*L; r_1 = .15; r_2 = .16; g = 9.81;
 rpmmax = 35000; motorvolt = 12; batteryvolt = 11.1; motorresist = 0.13; bearingcof = 0.025;
 
 % Calculations
-params.g = g; 
+params.g = g;
 params.I_p = eval(subs(I_p,sym([m_w,m_L,L]),[m_w,m_L,L]));
 params.I_w = eval(subs(I_w,sym([m_w,r_1,r_2]),[m_w,r_1,r_2]));
 params.m_w = m_w; params.m_L = m_L; params.L = L; params.l = l; params.m_m = m_m;
 params.m_p = params.m_m + params.m_w + params.m_L; params.umax = batteryvolt;
 params.mu = bearingcof; params.K_v = rpmmax/motorvolt; params.K_t = 60 / 2 / pi / params.K_v; params.R_i = motorresist; % ohms
+
+% Settings
+params.swingup = 1;
+
 phi_e = 0;
 A = matlabFunction(As); A = A(params.I_p,params.I_w,params.K_t,params.R_i,...
     params.g,params.l,params.m_L,params.m_m,params.m_w,phi_e);
@@ -54,16 +58,16 @@ params.A = A; params.B = B; params.K = K;
 options = odeset('RelTol',1e-11,'AbsTol',1e-11);
 % tspan = [0,5];
 tspan = linspace(0,5,2^12); t = tspan;
-x0 = [.2;0;0];
+x0 = [.25;0;0]; %%%%%%%%%%% Change this (starting position) %%%%%%%%%%%
 % [t,x] = ode45(@(t,x) nleoms(t,x,params),tspan,x0,options);
 % [t,x] = ode45(@(t,x) nleoms(t,x,params),tspan,x0);
-x = rk4(@(t,x) nleoms(tspan,x,params),t,x0);
+[x,u] = rk4(@(t,x) nleoms(tspan,x,params),t,x0,params);
 
 
 
 % Plotting Results
 figure()
-subplot(3,1,1)
+subplot(4,1,1)
 hold on
 plot(t,x(:,1))
 if max(x(:,1) > 2.5)
@@ -72,16 +76,21 @@ end
 grid on
 ylabel("$x_1 = \phi$")
 hold off
-subplot(3,1,2)
+subplot(4,1,2)
 hold on
 plot(t,x(:,2))
 grid on
 ylabel("$x_2 = \dot{\phi}$")
 hold off
-subplot(3,1,3)
+subplot(4,1,3)
 plot(t,x(:,3))
 grid on
 ylabel("$x_3 = \dot{\theta}$")
+hold off
+subplot(4,1,4)
+plot(t,u)
+grid on
+ylabel("$u [V]$")
 hold off
 
 function [A,B] = lin_dyn_SO(F,vars,var_ind)
@@ -106,13 +115,13 @@ function dxdt = nleoms(t,x,params)
 
 u = -params.K*x;
 
-maxstab = .25;
+maxstab = .25; % maximum displacement before stabilization stopps and swing-up takes over
 
-if x(1) > maxstab % enable swing up
+if x(1) > maxstab && params.swingup % enable swing up
     if x(2) < 0 % swinging CW
         u = params.umax;
     elseif x(2) > 0 % swinging CCW
-%         u = -params.umax;
+        %         u = -params.umax;
         u = 0; % can only swing up in this direction for some reason lol, need to figure out some modulus math so that it can stabilize from the other side as well.
     end
 elseif abs(x(1)) <= maxstab % enable stabilization
@@ -123,6 +132,12 @@ elseif abs(x(1)) <= maxstab % enable stabilization
     end
 end
 
+if t < 0
+    u = 0;
+elseif abs(u) > params.umax
+    u = sign(u) * params.umax;
+end
+
 
 dxdt = [x(2);
     params.I_p^-1 * (params.m_p*params.l*params.g*sin(x(1))...
@@ -131,20 +146,21 @@ dxdt = [x(2);
 
 end
 
-function x = rk4(f,t,x0)
+function [x,u] = rk4(f,t,x0,params)
 
 n = length(t);
 h = (t(2)-t(1));
 % x(state,time)
 x(:,1) = x0;
-
+u(1) = 0;
 for i = 1:(n-1)
     k_1 = f(t(i),x(:,i));
     k_2 = f(t(i)+0.5*h,x(:,i)+0.5*h*k_1);
     k_3 = f((t(i)+0.5*h),(x(:,i)+0.5*h*k_2));
     k_4 = f((t(i)+h),(x(:,i)+k_3*h));
-    x(:,i+1) = x(:,i) + (1/6)*(k_1+2*k_2+2*k_3+k_4)*h + .0005*randn(size(x0));
+    x(:,i+1) = x(:,i) + (1/6)*(k_1+2*k_2+2*k_3+k_4)*h + 0*.0005*randn(size(x0));
 
+    u(i+1) = genu(t(i),x(:,i),params);
 end
 x = x.';
 end
@@ -155,3 +171,28 @@ u = -params.K*x;
 dxdt = params.A*x+params.B*u;
 end
 
+function u = genu(t,x,params)
+u = -params.K*x;
+
+maxstab = .25; % maximum displacement before stabilization stopps and swing-up takes over
+
+if x(1) > maxstab && params.swingup % enable swing up
+    if x(2) < 0 % swinging CW
+        u = params.umax;
+    elseif x(2) > 0 % swinging CCW
+        %         u = -params.umax;
+        u = 0; % can only swing up in this direction for some reason lol, need to figure out some modulus math so that it can stabilize from the other side as well.
+    end
+elseif abs(x(1)) <= maxstab % enable stabilization
+    if t < 0
+        u = 0;
+    elseif abs(u) > params.umax
+        u = sign(u) * params.umax;
+    end
+end
+if t < 0
+    u = 0;
+elseif abs(u) > params.umax
+    u = sign(u) * params.umax;
+end
+end
