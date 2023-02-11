@@ -295,9 +295,7 @@ The section on the modeling took about a day to derive, formulate, and implement
 The motors that will be used are 12V DC brushed motors. They were cheap and came in a 2-pack and had a max unloaded RPM of 35000 according to the specifications. This gives us a $K_v% of 35000/12 which will be used later in the calculation of the torque that is able to be generated with the reaction wheel attatched. A 3s Li-Po (11.1V) battery will be used to power them so they will reach close enough to their maximum output.
 
 ### Motor Driver
-Driving these motors will be a HiLetgo BTS7960. This allows the motors to be controlled by an Arduino and be able to switch between forward and reverse rotations. It takes in power from the battery and uses a pulse width modulation (PWM) signal from the Arduino to control the voltage going to the motors.
-
-#### ESC Functions (Arduino)
+Driving these motors will be a HiLetgo BTS7960. This allows the motors to be controlled by an Arduino and be able to switch between forward and reverse rotations. It takes in power from the battery and uses a pulse width modulation (PWM) signal from the Arduino to control the voltage going to the motors. Keep in mind that reversing a motor while its spinning could damage it through mechanical stresses as well causing electrical load spikes, fortunately for me, I don't intend to keep this project for long so it doesn't concern me too much.
 
 ### Sensors
 #### MPU6050
