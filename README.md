@@ -292,12 +292,10 @@ The section on the modeling took about a day to derive, formulate, and implement
 
 ### Arduino
 ### Motors
-The motor that I chose is the A2212, I picked this because it came in a [4-pack](https://www.amazon.com/dp/B06WW9KTH4?psc=1&ref=ppx_yo2ov_dt_b_product_details), it was cheapish, and I don't know much about motors and how to cherry pick them based on performance. The ESCs in the pack are actually useless for this project since they are not bidirectional so I picked up another one that has bidirectional functionality (detailed in the next section). 
+The motors that will be used are 12V DC brushed motors. They were cheap and came in a 2-pack and had a max unloaded RPM of 35000 according to the specifications. This gives us a $K_v% of 35000/12 which will be used later in the calculation of the torque that is able to be generated with the reaction wheel attatched. A 3s Li-Po (11.1V) battery will be used to power them so they will reach close enough to their maximum output.
 
-These motors have a Kv value (velocity constant) of 1000 so they have a theoretical maximum speed of about 11000 RPM (with the use of a 3S li-po battery = 11.1V).
-
-### ESC (Electronic Speed Control)
-Aparently it's not good for the health of a motor and the ESC to reverse the motor that is already moving without it fully stopping, but I really don't intend for this project to last long so we'll go ahead and use this to be able to reverse the motor in order to change the direction of the torque of the reaction wheel. This specific ESC is a 30 amp ESC that advertises 1:1 power in both directions. It's controlled by a PWM signal (supplied by an Arduino) and has a deadzone somewhere in the middle of the maximum and minimum PWM signal which will have to be measured, this won't be taken into account with the control generation, but hopefully the control methods are robust enough to be able to overcome this with while only slightly affecting the performance.
+### Motor Driver
+Driving these motors will be a HiLetgo BTS7960. This allows the motors to be controlled by an Arduino and be able to switch between forward and reverse rotations. It takes in power from the battery and uses a pulse width modulation (PWM) signal from the Arduino to control the voltage going to the motors.
 
 #### ESC Functions (Arduino)
 
