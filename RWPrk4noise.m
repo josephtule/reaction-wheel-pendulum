@@ -29,7 +29,7 @@ I_PM = (m_w + m_m)*L^2;
 I_p = I_L + I_PM;
 
 % Physical Properties (change these)
-m_w = 25/1000; m_m = 230/1000; m_L = 100/1000; L = .25; l = .75*L; r_1 = .15; r_2 = .16; g = 9.81;
+m_w = 25/1000; m_m = 230/1000; m_L = 50/1000; L = .125; l = .75*L; r_1 = .12; r_2 = .125; g = 9.81;
 rpmmax = 35000; motorvolt = 12; batteryvolt = 11.1; motorresist = 0.13; bearingcof = 0.025;
 
 % Calculations
@@ -58,7 +58,7 @@ params.A = A; params.B = B; params.K = K;
 options = odeset('RelTol',1e-11,'AbsTol',1e-11);
 % tspan = [0,5];
 tspan = linspace(0,5,2^12); t = tspan;
-x0 = [.25;0;0]; %%%%%%%%%%% Change this (starting position) %%%%%%%%%%%
+x0 = [-pi/8;0;0]; %%%%%%%%%%% Change this (starting position) %%%%%%%%%%%
 % [t,x] = ode45(@(t,x) nleoms(t,x,params),tspan,x0,options);
 % [t,x] = ode45(@(t,x) nleoms(t,x,params),tspan,x0);
 [x,u] = rk4(@(t,x) nleoms(tspan,x,params),t,x0,params);
@@ -91,108 +91,118 @@ subplot(4,1,4)
 plot(t,u)
 grid on
 ylabel("$u [V]$")
+xlabel("$time [s]$")
 hold off
+sgtitle("Reaction Wheel Pendulum Simulation")
 
 function [A,B] = lin_dyn_SO(F,vars,var_ind)
-ddot_ind = var_ind{1}; dot_ind = var_ind{2}; ind = var_ind{3}; u_ind = var_ind{4};
-
-for j = 1:length(F)
-    for k = 1:length(vars)
-        PD(j,k) = diff(F(j),vars(k));
+    ddot_ind = var_ind{1}; dot_ind = var_ind{2}; ind = var_ind{3}; u_ind = var_ind{4};
+    
+    for j = 1:length(F)
+        for k = 1:length(vars)
+            PD(j,k) = diff(F(j),vars(k));
+        end
     end
-end
-
-M = PD(:,ddot_ind(1):ddot_ind(end));
-D = PD(:,dot_ind(1):dot_ind(end));
-S = PD(:,ind(1):ind(end));
-W = PD(:,u_ind(1):u_ind(end));
-A = simplify([zeros(size(M)), eye(size(M));
-    M^-1*(-S), M^-1*(-D)]);
-B = simplify([zeros(size(W));M^-1*(-W)]);
+    
+    M = PD(:,ddot_ind(1):ddot_ind(end));
+    D = PD(:,dot_ind(1):dot_ind(end));
+    S = PD(:,ind(1):ind(end));
+    W = PD(:,u_ind(1):u_ind(end));
+    A = simplify([zeros(size(M)), eye(size(M));
+        M^-1*(-S), M^-1*(-D)]);
+    B = simplify([zeros(size(W));M^-1*(-W)]);
 end
 
 function dxdt = nleoms(t,x,params)
-
-u = -params.K*x;
-
-maxstab = .25; % maximum displacement before stabilization stopps and swing-up takes over
-
-if x(1) > maxstab && params.swingup % enable swing up
-    if x(2) < 0 % swinging CW
-        u = params.umax;
-    elseif x(2) > 0 % swinging CCW
-        %         u = -params.umax;
-        u = 0; % can only swing up in this direction for some reason lol, need to figure out some modulus math so that it can stabilize from the other side as well.
-    end
-elseif abs(x(1)) <= maxstab % enable stabilization
+    
+    u = -params.K*x;
+    
+    % maxstab = .25; % maximum displacement before stabilization stopps and swing-up takes over
+    % 
+    % if x(1) > maxstab && params.swingup % enable swing up
+    %     if x(2) < 0 % swinging CW
+    %         u = params.umax;
+    %     elseif x(2) > 0 % swinging CCW
+    %         %         u = -params.umax;
+    %         u = 0; % can only swing up in this direction for some reason lol, need to figure out some modulus math so that it can stabilize from the other side as well.
+    %     end
+    % elseif abs(x(1)) <= maxstab % enable stabilization
+    %     if t < 0
+    %         u = 0;
+    %     elseif abs(u) > params.umax
+    %         u = sign(u) * params.umax;
+    %     end
+    % end
+    
+    u = genu(t,x,params);
+    
+    
     if t < 0
         u = 0;
     elseif abs(u) > params.umax
         u = sign(u) * params.umax;
     end
-end
-
-if t < 0
-    u = 0;
-elseif abs(u) > params.umax
-    u = sign(u) * params.umax;
-end
-
-
-dxdt = [x(2);
-    params.I_p^-1 * (params.m_p*params.l*params.g*sin(x(1))...
-    - (params.K_t * u / params.R_i - params.K_t^2 * x(3) / params.R_i)- params.mu * params.L * x(2));
-    (params.K_t * u / params.R_i - params.K_t^2 * x(3) / params.R_i) / params.I_w];
+    
+    
+    dxdt = [x(2);
+        params.I_p^-1 * (params.m_p*params.l*params.g*sin(x(1))...
+        - (params.K_t * u / params.R_i - params.K_t^2 * x(3) / params.R_i)- params.mu * params.L * x(2));
+        (params.K_t * u / params.R_i - params.K_t^2 * x(3) / params.R_i) / params.I_w];
 
 end
 
 function [x,u] = rk4(f,t,x0,params)
-
-n = length(t);
-h = (t(2)-t(1));
-% x(state,time)
-x(:,1) = x0;
-u(1) = 0;
-for i = 1:(n-1)
-    k_1 = f(t(i),x(:,i));
-    k_2 = f(t(i)+0.5*h,x(:,i)+0.5*h*k_1);
-    k_3 = f((t(i)+0.5*h),(x(:,i)+0.5*h*k_2));
-    k_4 = f((t(i)+h),(x(:,i)+k_3*h));
-    x(:,i+1) = x(:,i) + (1/6)*(k_1+2*k_2+2*k_3+k_4)*h + 0*.0005*randn(size(x0));
-
-    u(i+1) = genu(t(i),x(:,i),params);
-end
-x = x.';
+    
+    n = length(t);
+    h = (t(2)-t(1));
+    % x(state,time)
+    x(:,1) = x0;
+    u(1) = 0;
+    for i = 1:(n-1)
+        k_1 = f(t(i),x(:,i));
+        k_2 = f(t(i)+0.5*h,x(:,i)+0.5*h*k_1);
+        k_3 = f((t(i)+0.5*h),(x(:,i)+0.5*h*k_2));
+        k_4 = f((t(i)+h),(x(:,i)+k_3*h));
+        x(:,i+1) = x(:,i) + (1/6)*(k_1+2*k_2+2*k_3+k_4)*h + 0*.0005*randn(size(x0));
+    
+        u(i+1) = genu(t(i),x(:,i),params);
+    end
+    x = x.';
 end
 
 function dxdt = lineoms(t,x,params)
-u = -params.K*x;
-% u = 0;
-dxdt = params.A*x+params.B*u;
+    u = -params.K*x;
+    % u = 0;
+    dxdt = params.A*x+params.B*u;
 end
 
 function u = genu(t,x,params)
-u = -params.K*x;
-
-maxstab = .25; % maximum displacement before stabilization stopps and swing-up takes over
-
-if x(1) > maxstab && params.swingup % enable swing up
-    if x(2) < 0 % swinging CW
-        u = params.umax;
-    elseif x(2) > 0 % swinging CCW
-        %         u = -params.umax;
-        u = 0; % can only swing up in this direction for some reason lol, need to figure out some modulus math so that it can stabilize from the other side as well.
+    u = -params.K*x;
+    
+    maxstab = .25; % maximum displacement before stabilization stopps and swing-up takes over
+    
+    if x(1) > maxstab && params.swingup % enable swing up
+        if x(2) < 0 % swinging CW
+            u = params.umax;
+        elseif x(2) > 0 % swinging CCW
+            %         u = -params.umax;
+            u = 0; % can only swing up in this direction for some reason lol, need to figure out some modulus math so that it can stabilize from the other side as well.
+        end
+    elseif abs(x(1)) <= maxstab % enable stabilization
+        if t < 0
+            u = 0;
+        elseif abs(u) > params.umax
+            u = sign(u) * params.umax;
+        end
+    elseif x(1) < -pi/8 % stop simulation if x goes too far clockwise
+        u = 0;
     end
-elseif abs(x(1)) <= maxstab % enable stabilization
+    
+    
+    
     if t < 0
         u = 0;
     elseif abs(u) > params.umax
         u = sign(u) * params.umax;
     end
-end
-if t < 0
-    u = 0;
-elseif abs(u) > params.umax
-    u = sign(u) * params.umax;
-end
 end
